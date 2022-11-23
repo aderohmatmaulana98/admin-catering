@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\PaketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('produk', [ProdukController::class, 'index']);
     Route::post('produk', [ProdukController::class, 'create']);
     Route::put('produk/{id}', [ProdukController::class, 'update']);
-    Route::put('banner/{id}', [BannerController::class, 'update']);
     Route::delete('produk/{id}', [ProdukController::class, 'delete']);
+
+    //paket
+    Route::get('paket', [PaketController::class, 'index']);
+    Route::post('paket', [PaketController::class, 'create']);
+    Route::put('paket/{id}', [PaketController::class, 'update']);
+    Route::delete('paket/{id}', [PaketController::class, 'delete']);
 });
