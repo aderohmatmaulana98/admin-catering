@@ -39,10 +39,13 @@ class ProdukController extends Controller
             ]);
         }
 
+        $nameFile = $request->file('gambar')->getClientOriginalName();
+        $path = $request->file('gambar')->storeAs('images', $nameFile, 'public');
+
         $produk = Produk::create([
             'nama_produk' => $request->namaProduk,
             'harga' => $request->harga,
-            'gambar' => $request->gambar,
+            'gambar' => $images,
             'stok' => $request->stok,
             'keterangan' => $request->keterangan
         ]);
