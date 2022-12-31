@@ -14,6 +14,11 @@ class Produk extends Model
         'harga',
         'gambar',
         'stok',
-        'keterangan'
+        'keterangan',
+        'id_paket',
+    ];
+
+    protected $casts = [
+        'gambar' => 'json'
     ];
 }
