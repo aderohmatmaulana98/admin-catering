@@ -14,7 +14,7 @@
                         <img src="<?= base_url('assets/') ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Vandus</a>
+                        <a href="#" class="d-block"><?= $user->full_name ?></a>
                     </div>
                 </div>
 
@@ -23,8 +23,8 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item">
+                            <a href="<?= base_url('admin/index') ?>" class="nav-link <?= ($title == 'Dashboard') ? 'active' : '' ?>">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -32,7 +32,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
+                            <a href="<?= base_url('admin/produk') ?>" class="nav-link <?= ($title == 'Produk') ? 'active' : '' ?>">
                                 <i class="fas fa-utensils"></i>
                                 <p>
                                     Produk
@@ -40,7 +40,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
+                            <a href="<?= base_url('admin/paket') ?>" class="nav-link <?= ($title == 'Paket') ? 'active' : '' ?>">
                                 <i class="fas fa-box"></i>
                                 <p>
                                     Paket
@@ -48,7 +48,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
+                            <a href="pages/widgets.html" class="nav-link <?= ($title == 'Status') ? 'active' : '' ?>">
                                 <i class="fas fa-walking"></i>
                                 <p>
                                     Status
@@ -56,7 +56,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
+                            <a href="pages/widgets.html" class="nav-link <?= ($title == 'Pemesanan') ? 'active' : '' ?>">
                                 <i class="fas fa-shopping-cart"></i>
                                 <p>
                                     Pemesanan
@@ -66,13 +66,13 @@
 
                         <li class="nav-header">ACCOUNT</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link <?= ($title == 'Dashboard') ? 'My Profile' : '' ?>">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p class="text">My Profile</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('auth/logout') ?>" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Logout</p>
                             </a>
