@@ -21,7 +21,8 @@ class ProdukController extends Controller
             'harga',
             'gambar',
             'stok',
-            'keterangan'
+            'keterangan',
+            'idProduk'
         );
 
         $validator = Validator::make($data,[
@@ -29,7 +30,8 @@ class ProdukController extends Controller
             'harga' => 'required',
             'gambar' => 'required',
             'stok' => 'required',
-            'keterangan' => 'required'
+            'keterangan' => 'required',
+            'idProduk' => 'required'
         ]);
 
         if($validator->fails()) {
@@ -45,9 +47,10 @@ class ProdukController extends Controller
         $produk = Produk::create([
             'nama_produk' => $request->namaProduk,
             'harga' => $request->harga,
-            'gambar' => $images,
+            'gambar' => asset($path),
             'stok' => $request->stok,
-            'keterangan' => $request->keterangan
+            'keterangan' => $request->keterangan,
+            'id_produk' => $request->idProduk
         ]);
 
         return response()->json([
@@ -64,7 +67,8 @@ class ProdukController extends Controller
             'harga',
             'gambar',
             'stok',
-            'keterangan'
+            'keterangan',
+            'idProduk'
         );
 
         $produk = Produk::findOrFail($id);
