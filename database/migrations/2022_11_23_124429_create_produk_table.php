@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('gambar');
             $table->integer('stok');
             $table->string('keterangan');
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('roles');
+            $table->unsignedBigInteger('id_paket');
+            $table->foreign('id_paket')->references('id')->on('paket');
             $table->timestamps();
         });
     }
