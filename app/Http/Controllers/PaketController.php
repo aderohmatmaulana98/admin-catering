@@ -18,13 +18,11 @@ class PaketController extends Controller
     {
         $data = $request->only(
             'namaPaket',
-            'idProduk',
             'harga'
         );
 
         $validator = Validator::make($data, [
             'namaPaket' => 'required',
-            'idProduk' => 'required|integer',
             'harga' => 'required'
         ]);
 
@@ -37,7 +35,6 @@ class PaketController extends Controller
 
         $paket = Paket::create([
             'nama_paket' => $request->namaPaket,
-            'id_produk' => $request->idProduk,
             'harga' => $request->harga
         ]);
 
@@ -52,7 +49,6 @@ class PaketController extends Controller
     {
         $data = $request->only(
             'namaPaket',
-            'idProduk',
             'harga'
         );
 
