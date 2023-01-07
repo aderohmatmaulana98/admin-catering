@@ -50,7 +50,7 @@ class ProdukController extends Controller
             'gambar' => asset($path),
             'stok' => $request->stok,
             'keterangan' => $request->keterangan,
-            'id_paket' => $request->idProduk
+            'id_paket' => $request->idPaket
         ]);
 
         return response()->json([
