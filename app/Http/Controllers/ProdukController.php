@@ -47,7 +47,7 @@ class ProdukController extends Controller
         $produk = Produk::create([
             'nama_produk' => $request->namaProduk,
             'harga' => $request->harga,
-            'gambar' => asset($path),
+            'gambar' => asset("/storage/".$path),
             'stok' => $request->stok,
             'keterangan' => $request->keterangan,
             'id_paket' => $request->idPaket
