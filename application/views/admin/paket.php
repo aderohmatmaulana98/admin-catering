@@ -36,7 +36,7 @@
                              <div class="modal-dialog">
                                  <div class="modal-content">
                                      <div class="modal-header">
-                                         <h5 class="modal-title" id="exampleModalLabel">Tambah Produk </h5>
+                                         <h5 class="modal-title" id="exampleModalLabel">Tambah Paket </h5>
                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                              <span aria-hidden="true">&times;</span>
                                          </button>
@@ -44,24 +44,12 @@
                                      <div class="modal-body">
                                          <form action="<?= base_url('admin/insert_paket') ?>" method="POST">
                                              <div class="form-group">
-                                                 <label for="nama_paket">Nama Paket</label>
-                                                 <input type="text" class="form-control" id="nama_paket" name="nama_paket" required>
+                                                 <label for="namaPaket">Nama Paket</label>
+                                                 <input type="text" class="form-control" id="namaPaket" name="namaPaket" required>
                                              </div>
                                              <div class="form-group">
                                                  <label for="harga">Harga</label>
                                                  <input type="number" class="form-control" id="harga" name="harga" required>
-                                             </div>
-                                             <div class="form-group">
-                                                 <label for="stok">Stok</label>
-                                                 <input type="number" class="form-control" id="stok" name="stok" required>
-                                             </div>
-                                             <div class="form-group">
-                                                 <label for="gambar">Gambar</label>
-                                                 <input type="text" class="form-control-file" id="gambar" name="gambar" required>
-                                             </div>
-                                             <div class="form-group">
-                                                 <label for="keterangan">Keterangan</label>
-                                                 <input type="text" class="form-control" id="keterangan" name="keterangan" required>
                                              </div>
                                      </div>
                                      <div class="modal-footer">
@@ -78,24 +66,18 @@
                              <thead>
                                  <tr>
                                      <th>No</th>
-                                     <th>Nama Produk</th>
+                                     <th>Nama Paket</th>
                                      <th>Harga</th>
-                                     <th>Stok</th>
-                                     <th>Gambar</th>
-                                     <th>Keterangan</th>
                                      <th>Action</th>
                                  </tr>
                              </thead>
                              <tbody>
                                  <?php $no = 1;
-                                    foreach ($produk as $p) : ?>
+                                    foreach ($paket as $p) : ?>
                                      <tr>
                                          <td><?= $no; ?></td>
-                                         <td><?= $p->nama_produk; ?></td>
+                                         <td><?= $p->nama_paket; ?></td>
                                          <td><?= $p->harga;  ?></td>
-                                         <td><?= $p->stok; ?></td>
-                                         <td><?= $p->gambar; ?></td>
-                                         <td><?= $p->keterangan; ?></td>
                                          <td>
                                              <a href="#" type="button" data-toggle="modal" data-target="#exampleModal1<?= $p->id; ?>"><span class="badge badge-pill badge-success">Edit</span></a>
 
@@ -104,33 +86,21 @@
                                                  <div class="modal-dialog">
                                                      <div class="modal-content">
                                                          <div class="modal-header">
-                                                             <h5 class="modal-title" id="exampleModalLabel">Edit Produk</h5>
+                                                             <h5 class="modal-title" id="exampleModalLabel">Edit Paket</h5>
                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                  <span aria-hidden="true">&times;</span>
                                                              </button>
                                                          </div>
                                                          <div class="modal-body">
-                                                             <form action="<?= base_url('admin/update_produk') ?>" method="POST" enctype="application/x-www-form-urlencoded">
+                                                             <form action="<?= base_url('admin/update_paket') ?>" method="POST" enctype="application/x-www-form-urlencoded">
                                                                  <div class="form-group">
-                                                                     <label for="nama_produk">Nama Produk</label>
-                                                                     <input type="text" class="form-control" id="nama_produk" name="namaProduk" value="<?= $p->nama_produk ?>" required>
-                                                                     <input type="text" class="form-control" id="id" name="id" value="<?= $p->id ?>" required>
+                                                                     <label for="nama_paket">Nama paket</label>
+                                                                     <input type="text" class="form-control" id="nama_paket" name="namaPaket" value="<?= $p->nama_paket ?>" required>
+                                                                     <input type="text" class="form-control" id="id" name="id" value="<?= $p->id ?>" hidden required>
                                                                  </div>
                                                                  <div class="form-group">
                                                                      <label for="harga">Harga</label>
                                                                      <input type="number" class="form-control" id="harga" name="harga" value="<?= $p->harga ?>" required>
-                                                                 </div>
-                                                                 <div class="form-group">
-                                                                     <label for="stok">Stok</label>
-                                                                     <input type="number" class="form-control" id="stok" name="stok" value="<?= $p->stok ?>" required>
-                                                                 </div>
-                                                                 <div class="form-group">
-                                                                     <label for="gambar">Gambar</label>
-                                                                     <input type="text" class="form-control-file" id="gambar" name="gambar" value="<?= $p->gambar ?>" required>
-                                                                 </div>
-                                                                 <div class="form-group">
-                                                                     <label for="keterangan">Keterangan</label>
-                                                                     <input type="text" class="form-control" id="keterangan" name="keterangan" value="<?= $p->keterangan ?>" required>
                                                                  </div>
                                                          </div>
                                                          <div class="modal-footer">
@@ -141,7 +111,7 @@
                                                      </div>
                                                  </div>
                                              </div>
-                                             <a href="<?= base_url('admin/delete_product/' . $p->id); ?>" onclick="javascript: return confirm('Anda yakin akan menghapus ini? ')"><span class="badge badge-pill badge-danger">Hapus</span></a>
+                                             <a href="<?= base_url('admin/delete_paket/' . $p->id); ?>" onclick="javascript: return confirm('Anda yakin akan menghapus ini? ')"><span class="badge badge-pill badge-danger">Hapus</span></a>
                                          </td>
                                      </tr>
                                  <?php $no++;

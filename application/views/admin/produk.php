@@ -42,7 +42,7 @@
                                          </button>
                                      </div>
                                      <div class="modal-body">
-                                         <form action="<?= base_url('admin/insert_product') ?>" method="POST">
+                                         <form action="<?= base_url('admin/insert_product') ?>" method="POST" enctype="multipart/form-data">
                                              <div class="form-group">
                                                  <label for="nama_produk">Nama Produk</label>
                                                  <input type="text" class="form-control" id="nama_produk" name="namaProduk" required>
@@ -56,8 +56,17 @@
                                                  <input type="number" class="form-control" id="stok" name="stok" required>
                                              </div>
                                              <div class="form-group">
+                                                 <label for="paket">Paket</label>
+                                                 <select class="form-control" id="paket" name="paket" id="paket" required>
+                                                     <option selected disabled>Pilih Paket</option>
+                                                     <?php foreach ($paket as $p) : ?>
+                                                         <option value="<?= $p->id; ?>"><?= $p->nama_paket; ?></option>
+                                                     <?php endforeach; ?>
+                                                 </select>
+                                             </div>
+                                             <div class="form-group">
                                                  <label for="gambar">Gambar</label>
-                                                 <input type="text" class="form-control-file" id="gambar" name="gambar" required>
+                                                 <input type="file" class="form-control-file" id="gambar" name="gambar" required>
                                              </div>
                                              <div class="form-group">
                                                  <label for="keterangan">Keterangan</label>
@@ -94,7 +103,7 @@
                                          <td><?= $p->nama_produk; ?></td>
                                          <td><?= $p->harga;  ?></td>
                                          <td><?= $p->stok; ?></td>
-                                         <td><?= $p->gambar; ?></td>
+                                         <td><img src="<?php echo  $p->gambar; ?>" width="100" height="100"></td>
                                          <td><?= $p->keterangan; ?></td>
                                          <td>
                                              <a href="#" type="button" data-toggle="modal" data-target="#exampleModal1<?= $p->id; ?>"><span class="badge badge-pill badge-success">Edit</span></a>
