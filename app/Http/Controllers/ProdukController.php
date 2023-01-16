@@ -6,6 +6,7 @@ use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use DB;
 
 class ProdukController extends Controller
 {
@@ -56,6 +57,16 @@ class ProdukController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'produk created',
+            'data' => $produk
+        ], Response::HTTP_OK);
+    }
+
+    public function getProdukByPaketId(Request $request, $id)
+    {
+        $produk = DB::select('Select * from produk,paket where produk.id_paket ='.$id);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'produk updated',
             'data' => $produk
         ], Response::HTTP_OK);
     }
