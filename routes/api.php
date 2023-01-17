@@ -38,7 +38,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     //produk
     Route::get('produk', [ProdukController::class, 'index']);
     Route::post('produk', [ProdukController::class, 'create']);
-    Route::put('produk/{id}', [ProdukController::class, 'update']);
+    Route::post('produk/{id}', [ProdukController::class, 'update']);
     Route::delete('produk/{id}', [ProdukController::class, 'delete']);
     Route::get('produk/paket_id/{id}', [ProdukController::class, 'getProdukByPaketId']);
 

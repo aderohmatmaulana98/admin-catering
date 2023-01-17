@@ -82,8 +82,41 @@ class ProdukController extends Controller
             'idPaket'
         );
 
-        $produk = Produk::findOrFail($id);
-        $produk->update($request->all());
+        Produk::findOrFail($id)->delete();
+
+        $validator = Validator::make($data,[
+            'namaProduk' => 'required',
+            'harga' => 'required',
+            'gambar' => 'required',
+            'stok' => 'required',
+            'keterangan' => 'required',
+            'idPaket' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => $validator->messages()
+            ]);
+        }
+
+        $nameFile = $request->file('gambar')->getClientOriginalName();
+        $path = $request->file('gambar')->storeAs('images', $nameFile, 'public');
+
+        $produk = Produk::create([
+            'nama_produk' => $request->namaProduk,
+            'harga' => $request->harga,
+            'gambar' => asset("/storage/".$path),
+            'stok' => $request->stok,
+            'keterangan' => $request->keterangan,
+            'id_paket' => $request->idPaket
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'produk created',
+            'data' => $produk
+        ], Response::HTTP_OK);
 
         return response()->json([
             'status' => 'success',
