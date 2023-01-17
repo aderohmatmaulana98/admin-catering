@@ -6,6 +6,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\StatusPemesananController;
+use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\HistoriPemesananController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +50,22 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('paket', [PaketController::class, 'create']);
     Route::put('paket/{id}', [PaketController::class, 'update']);
     Route::delete('paket/{id}', [PaketController::class, 'delete']);
+
+    //status
+    Route::get('status', [StatusPemesananController::class, 'index']);
+    Route::post('status', [StatusPemesananController::class, 'create']);
+    Route::put('status/{id}', [StatusPemesananController::class, 'update']);
+    Route::delete('status/{id}', [StatusPemesananController::class, 'delete']);
+
+    //paket
+    Route::get('pemesanan', [PemesananController::class, 'index']);
+    Route::post('pemesanan', [PemesananController::class, 'create']);
+    Route::put('pemesanan/{id}', [PemesananController::class, 'update']);
+    Route::delete('pemesanan/{id}', [PemesananController::class, 'delete']);
+
+    //history
+    Route::get('history', [HistoriPemesananController::class, 'index']);
+    Route::post('history', [HistoriPemesananController::class, 'create']);
+    Route::put('history/{id}', [HistoriPemesananController::class, 'update']);
+    Route::delete('history/{id}', [HistoriPemesananController::class, 'delete']);
 });
