@@ -62,8 +62,10 @@ class ProdukController extends Controller
     }
 
     public function getProdukByPaketId(Request $request, $id)
-    {
-        $produk = DB::select('Select * from produk,paket where produk.id_paket ='.$id);
+    {   
+        $produk = DB::table('produk')
+            ->where('id_paket', '=', $id)
+            ->get();
         return response()->json([
             'status' => 'success',
             'message' => 'produk updated',
