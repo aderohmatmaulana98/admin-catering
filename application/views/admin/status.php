@@ -36,20 +36,16 @@
                              <div class="modal-dialog">
                                  <div class="modal-content">
                                      <div class="modal-header">
-                                         <h5 class="modal-title" id="exampleModalLabel">Tambah Paket </h5>
+                                         <h5 class="modal-title" id="exampleModalLabel">Tambah Status </h5>
                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                              <span aria-hidden="true">&times;</span>
                                          </button>
                                      </div>
                                      <div class="modal-body">
-                                         <form action="<?= base_url('admin/insert_paket') ?>" method="POST">
+                                         <form action="<?= base_url('admin/insert_status') ?>" method="POST">
                                              <div class="form-group">
-                                                 <label for="namaPaket">Nama Paket</label>
-                                                 <input type="text" class="form-control" id="namaPaket" name="namaPaket" required>
-                                             </div>
-                                             <div class="form-group">
-                                                 <label for="harga">Harga</label>
-                                                 <input type="number" class="form-control" id="harga" name="harga" required>
+                                                 <label for="namastatus">Nama Status</label>
+                                                 <input type="text" class="form-control" id="namastatus" name="namastatus" required>
                                              </div>
                                      </div>
                                      <div class="modal-footer">
@@ -66,18 +62,16 @@
                              <thead>
                                  <tr>
                                      <th>No</th>
-                                     <th>Nama Paket</th>
-                                     <th>Harga</th>
+                                     <th>Status</th>
                                      <th>Action</th>
                                  </tr>
                              </thead>
                              <tbody>
                                  <?php $no = 1;
-                                    foreach ($paket as $p) : ?>
+                                    foreach ($status as $p) : ?>
                                      <tr>
                                          <td><?= $no; ?></td>
-                                         <td><a href="<?= base_url('admin/produk_by_paket/') . $p->id ?>"><?= $p->nama_paket; ?></a></td>
-                                         <td><?= $p->harga;  ?></td>
+                                         <td><?= $p->nama_status; ?></td>
                                          <td>
                                              <a href="#" type="button" data-toggle="modal" data-target="#exampleModal1<?= $p->id; ?>"><span class="badge badge-pill badge-success">Edit</span></a>
 
@@ -86,21 +80,17 @@
                                                  <div class="modal-dialog">
                                                      <div class="modal-content">
                                                          <div class="modal-header">
-                                                             <h5 class="modal-title" id="exampleModalLabel">Edit Paket</h5>
+                                                             <h5 class="modal-title" id="exampleModalLabel">Edit Status</h5>
                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                  <span aria-hidden="true">&times;</span>
                                                              </button>
                                                          </div>
                                                          <div class="modal-body">
-                                                             <form action="<?= base_url('admin/update_paket') ?>" method="POST" enctype="application/x-www-form-urlencoded">
+                                                             <form action="<?= base_url('admin/update_status') ?>" method="POST" enctype="application/x-www-form-urlencoded">
                                                                  <div class="form-group">
-                                                                     <label for="nama_paket">Nama paket</label>
-                                                                     <input type="text" class="form-control" id="nama_paket" name="namaPaket" value="<?= $p->nama_paket ?>" required>
+                                                                     <label for="nama_status">Nama status</label>
+                                                                     <input type="text" class="form-control" id="nama_status" name="nama_status" value="<?= $p->nama_status ?>" required>
                                                                      <input type="text" class="form-control" id="id" name="id" value="<?= $p->id ?>" hidden required>
-                                                                 </div>
-                                                                 <div class="form-group">
-                                                                     <label for="harga">Harga</label>
-                                                                     <input type="number" class="form-control" id="harga" name="harga" value="<?= $p->harga ?>" required>
                                                                  </div>
                                                          </div>
                                                          <div class="modal-footer">
@@ -111,7 +101,7 @@
                                                      </div>
                                                  </div>
                                              </div>
-                                             <a href="<?= base_url('admin/delete_paket/' . $p->id); ?>" onclick="javascript: return confirm('Anda yakin akan menghapus ini? ')"><span class="badge badge-pill badge-danger">Hapus</span></a>
+                                             <a href="<?= base_url('admin/delete_status/' . $p->id); ?>" onclick="javascript: return confirm('Anda yakin akan menghapus ini? ')"><span class="badge badge-pill badge-danger">Hapus</span></a>
                                          </td>
                                      </tr>
                                  <?php $no++;

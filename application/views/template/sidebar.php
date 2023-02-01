@@ -48,7 +48,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link <?= ($title == 'Status') ? 'active' : '' ?>">
+                            <a href="<?= base_url('admin/status') ?>" class="nav-link <?= ($title == 'Status') ? 'active' : '' ?>">
                                 <i class="fas fa-walking"></i>
                                 <p>
                                     Status
@@ -66,7 +66,7 @@
 
                         <li class="nav-header">ACCOUNT</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?= ($title == 'Dashboard') ? 'My Profile' : '' ?>">
+                            <a href="<?= base_url('admin/my_profile') ?>" class="nav-link <?= ($title == 'My Profile') ? 'My Profile' : '' ?>">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p class="text">My Profile</p>
                             </a>

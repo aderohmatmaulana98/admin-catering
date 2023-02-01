@@ -119,7 +119,7 @@
                                                              </button>
                                                          </div>
                                                          <div class="modal-body">
-                                                             <form action="<?= base_url('admin/update_produk') ?>" method="POST" enctype="application/x-www-form-urlencoded">
+                                                             <form action="<?= base_url("admin/update_produk/$p->id") ?>" method="POST" enctype="multipart/form-data">
                                                                  <div class="form-group">
                                                                      <label for="nama_produk">Nama Produk</label>
                                                                      <input type="text" class="form-control" id="nama_produk" name="namaProduk" value="<?= $p->nama_produk ?>" required>
@@ -135,11 +135,21 @@
                                                                  </div>
                                                                  <div class="form-group">
                                                                      <label for="gambar">Gambar</label>
-                                                                     <input type="text" class="form-control-file" id="gambar" name="gambar" value="<?= $p->gambar ?>" required>
+                                                                     <input type="file" class="form-control-file" id="gambar" name="gambar" required>
+                                                                     <img src="<?= $p->gambar ?>" alt="" srcset="" width="100" height="100">
                                                                  </div>
                                                                  <div class="form-group">
                                                                      <label for="keterangan">Keterangan</label>
                                                                      <input type="text" class="form-control" id="keterangan" name="keterangan" value="<?= $p->keterangan ?>" required>
+                                                                 </div>
+                                                                 <div class="form-group">
+                                                                     <label for="paket">Paket</label>
+                                                                     <select class="form-control" id="paket" name="paket" id="paket" required>
+                                                                         <option selected disabled>Pilih Paket</option>
+                                                                         <?php foreach ($paket as $pkt) : ?>
+                                                                             <option value="<?= $pkt->id; ?>"><?= $pkt->nama_paket; ?></option>
+                                                                         <?php endforeach; ?>
+                                                                     </select>
                                                                  </div>
                                                          </div>
                                                          <div class="modal-footer">
