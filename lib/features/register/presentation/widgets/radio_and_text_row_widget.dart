@@ -1,4 +1,3 @@
-import 'package:cathering_mobile/features/register/domain/entities/gender.dart';
 import 'package:cathering_mobile/themes/colors.dart';
 import 'package:cathering_mobile/widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
