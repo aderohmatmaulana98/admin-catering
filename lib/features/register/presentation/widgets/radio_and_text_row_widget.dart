@@ -24,7 +24,7 @@ class RadioAndTextRowWidget extends StatelessWidget {
           groupValue: groupValue,
           
           fillColor: MaterialStateColor.resolveWith(
-            (states) => kPriamryColor,
+            (states) => kPrimaryColor,
           ),
           onChanged: onChanged,
         ),

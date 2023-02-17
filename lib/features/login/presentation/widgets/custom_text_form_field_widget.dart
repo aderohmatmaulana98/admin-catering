@@ -24,7 +24,7 @@ class CustomTextFormWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      cursorColor: kPriamryColor,
+      cursorColor: kPrimaryColor,
       keyboardType: textInputType,
       obscureText: isObscure,
       decoration: InputDecoration(
@@ -44,7 +44,7 @@ class CustomTextFormWidget extends StatelessWidget {
           ),
         ) :
         const SizedBox.shrink(),
-        focusColor: kPriamryColor,
+        focusColor: kPrimaryColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.r),
         ),
@@ -54,7 +54,7 @@ class CustomTextFormWidget extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.r),
           borderSide: const BorderSide(
-            color: kPriamryColor,
+            color: kPrimaryColor,
           ),
         ),
       ),

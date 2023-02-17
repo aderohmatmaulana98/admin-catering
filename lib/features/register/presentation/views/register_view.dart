@@ -157,7 +157,7 @@ class _RegisterPageState extends State<RegisterPage> {
             TextSpan(
               text: 'Sign In',
               style: TextStyle(
-                color: kPriamryColor,
+                color: kPrimaryColor,
                 fontWeight: FontWeight.w700,
                 decoration: TextDecoration.underline,
                 fontSize: 13.sp,

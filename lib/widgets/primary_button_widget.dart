@@ -31,7 +31,7 @@ class PrimaryBtnWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: kPriamryColor,
+          backgroundColor: kPrimaryColor,
         ), 
         child: CustomTextWidget(
           text: text,

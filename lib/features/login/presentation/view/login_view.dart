@@ -1,11 +1,16 @@
+import 'package:cathering_mobile/features/home/presentation/views/home_view.dart';
+import 'package:cathering_mobile/features/login/presentation/bloc/login_bloc.dart';
 import 'package:cathering_mobile/features/login/presentation/widgets/custom_text_form_field_widget.dart';
 import 'package:cathering_mobile/features/register/presentation/views/register_view.dart';
+import 'package:cathering_mobile/injection_container.dart';
 import 'package:cathering_mobile/themes/colors.dart';
+import 'package:cathering_mobile/widgets/custom_dialog_widget.dart';
 import 'package:cathering_mobile/widgets/custom_text_widget.dart';
 import 'package:cathering_mobile/widgets/primary_button_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginView extends StatelessWidget {
@@ -13,7 +18,10 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LoginPage();
+    return BlocProvider(
+      create: (context) => sl<LoginBloc>(),
+      child: const LoginPage(),
+    );
   }
 }
 
@@ -28,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController _usernameEditingController;
   late TextEditingController _passwordEditingController;
   bool isObscure = true;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -49,31 +58,77 @@ class _LoginPageState extends State<LoginPage> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         backgroundColor: kBlackColor,
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 50.h,),
-              Image.asset(
-                'assets/images/logo.png',
-                width: 256.r,
-                height: 256.r,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: SizedBox(
+              width: 1.sw,
+              height: 1.sh,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 50.h,
+                    ),
+                    Image.asset(
+                      'assets/images/logo.png',
+                      width: 256.r,
+                      height: 256.r,
+                    ),
+                    SizedBox(
+                      height: 18.h,
+                    ),
+                    titleTextWidget(),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    subtitleTextWidget(),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    usernameTextFormFieldWidget(),
+                    SizedBox(
+                      height: 12.h,
+                    ),
+                    passwordTextFormWidget(),
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    BlocListener<LoginBloc, LoginState>(
+                      listener: (context, state) {
+                        if(state is LoginSuccess){
+                          Navigator.pushReplacement(
+                            context, 
+                            MaterialPageRoute(builder: (_) => const HomeView())
+                          );
+                        } else if (state is LoginFailed){
+                          showDialog(
+                            context: context, 
+                            builder: (_) => ErrorDialog(
+                              message: state.error.message,
+                              statusCode: state.error.statusCode.toString(),
+                            ),
+                          );
+                        } else {
+                          showDialog(
+                            context: context, 
+                            builder: (_)=> const LoadingDialog()
+                          );
+                        }
+                      },
+                      child: loginBtnWidget(),
+                    ),
+                    const Spacer(),
+                    registerText(),
+                    SizedBox(
+                      height: 32.h,
+                    )
+                  ],
+                ),
               ),
-              SizedBox(height: 18.h,),
-              titleTextWidget(),
-              SizedBox(height: 8.h,),
-              subtitleTextWidget(),
-              SizedBox(height: 24.h,),
-              usernameTextFormFieldWidget(),
-              SizedBox(height: 12.h,),
-              passwordTextFormWidget(),
-              SizedBox(height: 32.h,),
-              loginBtnWidget(),
-              const Spacer(),
-              registerText(),
-              SizedBox(height: 32.h,)
-            ],
+            ),
           ),
         ),
       ),
@@ -98,18 +153,18 @@ class _LoginPageState extends State<LoginPage> {
           TextSpan(
             text: 'Sign Up',
             style: TextStyle(
-              color: kPriamryColor,
+              color: kPrimaryColor,
               fontWeight: FontWeight.w700,
               decoration: TextDecoration.underline,
               fontSize: 13.sp,
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (_) => const RegisterView(),
-                ),
-              ),
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => const RegisterView(),
+                    ),
+                  ),
           ),
         ],
       ),
@@ -119,7 +174,14 @@ class _LoginPageState extends State<LoginPage> {
   PrimaryBtnWidget loginBtnWidget() {
     return PrimaryBtnWidget(
       onTap: () {
-
+        if(_formKey.currentState!.validate()){
+          context.read<LoginBloc>().add(
+            PostLoginEvent(
+              username: _usernameEditingController.text, 
+              password: _passwordEditingController.text
+            )
+          );
+        }
       },
       text: 'Sign In',
     );
