@@ -96,30 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 32.h,
                     ),
-                    BlocListener<LoginBloc, LoginState>(
-                      listener: (context, state) {
-                        if(state is LoginSuccess){
-                          Navigator.pushReplacement(
-                            context, 
-                            MaterialPageRoute(builder: (_) => const HomeView())
-                          );
-                        } else if (state is LoginFailed){
-                          showDialog(
-                            context: context, 
-                            builder: (_) => ErrorDialog(
-                              message: state.error.message,
-                              statusCode: state.error.statusCode.toString(),
-                            ),
-                          );
-                        } else {
-                          showDialog(
-                            context: context, 
-                            builder: (_)=> const LoadingDialog()
-                          );
-                        }
-                      },
-                      child: loginBtnWidget(),
-                    ),
+                    signInBtnBlocListener(),
                     const Spacer(),
                     registerText(),
                     SizedBox(
@@ -135,6 +112,33 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  BlocListener<LoginBloc, LoginState> signInBtnBlocListener() {
+    return BlocListener<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if(state is LoginSuccess){
+          Navigator.pushReplacement(
+            context, 
+            MaterialPageRoute(builder: (_) => const HomeView())
+          );
+        } else if (state is LoginFailed){
+          showDialog(
+            context: context, 
+            builder: (_) => ErrorDialog(
+              message: state.error.message,
+              statusCode: state.error.statusCode.toString(),
+            ),
+          );
+        } else {
+          showDialog(
+            context: context, 
+            builder: (_)=> const LoadingDialog()
+          );
+        }
+      },
+      child: loginBtnWidget(),
+    );
+  }
+
   Widget registerText() {
     return RichText(
       text: TextSpan(
@@ -143,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         children: [
           TextSpan(
-            text: 'Don\'t an account? ',
+            text: 'Belum punya akun? ',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w400,
@@ -151,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           TextSpan(
-            text: 'Sign Up',
+            text: 'Daftar',
             style: TextStyle(
               color: kPrimaryColor,
               fontWeight: FontWeight.w700,
@@ -183,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
           );
         }
       },
-      text: 'Sign In',
+      text: 'Masuk',
     );
   }
 
@@ -210,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
 
   CustomTextWidget subtitleTextWidget() {
     return CustomTextWidget(
-      text: 'The experience buying food quickly',
+      text: 'Pengalaman membeli makanan dengan cepat',
       size: 14.sp,
       weight: FontWeight.w500,
       color: Colors.white,
