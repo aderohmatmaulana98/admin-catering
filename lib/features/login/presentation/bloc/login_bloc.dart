@@ -20,7 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(LoginLoading());
     final result = await useCase(LoginParams(username: event.username, password: event.password));
     result!.fold(
-      (l) => emit(LoginFailed(ErrorModel(statusCode: l.statusCode, message: l.messsage))), 
+      (l) => emit(LoginFailed(ErrorModel(message: l.messsage))), 
       (r) => emit(LoginSuccess())
     );
   }

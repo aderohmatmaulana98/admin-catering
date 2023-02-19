@@ -20,7 +20,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(RegisterLoading());
     final result = await useCase(RegisterParams(userame: event.userame, password: event.password, name: event.name, phone: event.phone, address: event.address, email: event.email, gender: event.gender));
     result!.fold(
-      (l) => emit(RegisterFiled(ErrorModel(statusCode: l.statusCode, message: l.messsage))), 
+      (l) => emit(RegisterFiled(ErrorModel(message: l.messsage))), 
       (r) => emit(RegisterSuccess())
     );
   }

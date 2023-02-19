@@ -155,18 +155,25 @@ class _RegisterPageState extends State<RegisterPage> {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if(state is RegisterSuccess){
-          Navigator.pushReplacement(
-            context, 
-            MaterialPageRoute(builder: (_) => const LoginView())
+          showDialog(
+            context: context, 
+            builder: (context) => const CustomDialog(
+              title: 'Berhasil', 
+              content: 'Akun berhasil dibuat', 
+            ),
+          ).then(
+            (_) => Navigator.pushReplacement(
+              context, 
+              MaterialPageRoute(builder: (_) => const LoginView())
+            )
           );
         } else if (state is RegisterFiled){
           showDialog(
             context: context, 
             builder: (_) => ErrorDialog(
               message: state.error.message,
-              statusCode: state.error.statusCode.toString(),
             ),
-          );
+          ).then((_) => Navigator.pop(context));
         } else {
           showDialog(
             context: context, 
@@ -255,7 +262,7 @@ class _RegisterPageState extends State<RegisterPage> {
             phone: _phoneEditingController.text, 
             address: _alamatditingController.text, 
             email: _emailEditingController.text, 
-            gender: _groupValue!
+            gender: _groupValue ?? 'Pria'
           ));
         }
       },

@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:cathering_mobile/core/error/exception.dart';
 import 'package:cathering_mobile/core/error/failures.dart';
 import 'package:cathering_mobile/core/platform/network_info.dart';
@@ -21,12 +22,11 @@ class RegisterRepositoryImpl implements RegisterRepository {
         await remoteDataSource.postRegister(userame: userame, password: password, name: name, phone: phone, address: address, email: email, gender: gender);
         return const Right('Success');
       } on ServerException catch (e) {
-        return Left(ServerFailure(e.error.message, e.error.statusCode));
+        return Left(ServerFailure(e.error.message));
       }
     } else {
       return const Left(ServerFailure(
         'Please check your internet connection',
-        404
       ));
     }
   }

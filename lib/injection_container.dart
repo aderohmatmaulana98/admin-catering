@@ -1,4 +1,11 @@
 import 'package:cathering_mobile/core/platform/network_info.dart';
+import 'package:cathering_mobile/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:cathering_mobile/features/beranda/data/datasources/paket_local_data_source.dart';
+import 'package:cathering_mobile/features/beranda/data/datasources/paket_remote_data_sources.dart';
+import 'package:cathering_mobile/features/beranda/data/repositories/paket_repositories.dart';
+import 'package:cathering_mobile/features/beranda/domain/repositories/paket_repository.dart';
+import 'package:cathering_mobile/features/beranda/domain/usecases/get_paket_use_cases.dart';
+import 'package:cathering_mobile/features/beranda/presentation/bloc/paket_bloc.dart';
 import 'package:cathering_mobile/features/login/data/datasources/login_local_data_source.dart';
 import 'package:cathering_mobile/features/login/data/datasources/login_remote_data_source.dart';
 import 'package:cathering_mobile/features/login/data/repositories/login_repository_impl.dart';
@@ -61,6 +68,30 @@ Future<void> init() async {
     () => RegisterRemoteDataSourceImpl(client: sl())
   );
 
+
+  //!auth
+  //cubit
+  sl.registerFactory(() => AuthCubit(preferences: sl()));
+
+
+  //!paket
+  sl.registerFactory(() => PaketBloc(sl()));
+
+  //usecases
+  sl.registerLazySingleton(() => GetPaketUseCases(repository: sl()));
+
+  //respotiries
+  sl.registerLazySingleton<PaketRepository>(
+    () => PaketRepositoryImpl(remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl())
+  );
+
+  //datasourcees
+  sl.registerLazySingleton<PaketRemoteDataSource>(
+    () => PaketRemoteDataSourceImpl(client: sl(), localDataSource: sl())
+  );
+  sl.registerLazySingleton<PaketLocalDataSource>(
+    () => PaketLocalDataSourceImpl(preferences: sl())
+  );
 
 
 

@@ -26,12 +26,11 @@ class LoginRepositoryImpl implements LoginRepository {
         localDataSource.cachedLoginData(response!);
         return Right(response);
       } on ServerException catch (e) {
-        return Left(ServerFailure(e.error.message, e.error.statusCode!));
+        return Left(ServerFailure(e.error.message));
       }
     } else {
       return const Left(ServerFailure(
         'Pleasae check your internet connection',
-        404
       ));
     }
   }

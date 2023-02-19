@@ -1,4 +1,6 @@
+import 'package:cathering_mobile/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextWidget extends StatelessWidget {
   const CustomTextWidget({
@@ -6,10 +8,9 @@ class CustomTextWidget extends StatelessWidget {
     super.key, 
     this.size = 12, 
     this.weight = FontWeight.w400, 
-    this.color = Colors.black,
+    this.color = kTextColor,
     this.textAlign = TextAlign.start,
     this.isUsedMaxLines = true,
-    this.fontFamily = 'Roboto',
     this.textDecoration = TextDecoration.none,
     this.fontStyle = FontStyle.normal,
   });
@@ -20,7 +21,6 @@ class CustomTextWidget extends StatelessWidget {
   final Color color;
   final TextAlign textAlign;
   final bool isUsedMaxLines;
-  final String fontFamily;
   final TextDecoration textDecoration;
   final FontStyle fontStyle;
 
@@ -30,15 +30,16 @@ class CustomTextWidget extends StatelessWidget {
       text,
       maxLines: isUsedMaxLines ? 2 : null,
       textAlign: textAlign,
-      style: TextStyle(
+      style: GoogleFonts.montserrat(
+        textStyle: TextStyle(
+          overflow: isUsedMaxLines ? TextOverflow.ellipsis : TextOverflow.visible,
+        ),
         fontSize: size,
         fontWeight: weight,
         color: color,
         fontStyle: fontStyle,
-        overflow: isUsedMaxLines ? TextOverflow.ellipsis : TextOverflow.visible,
-        fontFamily: fontFamily,
         decoration: textDecoration,
-      ),
+      )
     );
   }
 }

@@ -125,7 +125,6 @@ class _LoginPageState extends State<LoginPage> {
             context: context, 
             builder: (_) => ErrorDialog(
               message: state.error.message,
-              statusCode: state.error.statusCode.toString(),
             ),
           );
         } else {

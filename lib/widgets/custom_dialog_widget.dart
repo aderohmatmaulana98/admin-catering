@@ -31,11 +31,10 @@ class LoadingDialog extends StatelessWidget {
 
 class ErrorDialog extends StatelessWidget {
   const ErrorDialog({
-    Key? key, required this.message, required this.statusCode,
+    Key? key, required this.message
   }) : super(key: key);
 
   final String message;
-  final String statusCode;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class ErrorDialog extends StatelessWidget {
         size: 16.sp,
         weight: FontWeight.w600,
       ),
-      content: Text('$message ($statusCode)'),
+      content: Text(message),
       actions: [
         TextButton(
           onPressed: ()=> Navigator.pop(context), 
@@ -55,6 +54,36 @@ class ErrorDialog extends StatelessWidget {
             color: kPrimaryColor,
           )
         )
+      ],
+    );
+  }
+}
+
+class CustomDialog extends StatelessWidget {
+  const CustomDialog({
+    Key? key, required this.content, required this.title
+  }) : super(key: key);
+
+  final String content;
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: CustomTextWidget(
+        text: title,
+        size: 16.sp,
+        weight: FontWeight.w600,
+      ),
+      content: Text(content),
+      actions: [
+        TextButton(
+          onPressed: ()=> Navigator.pop(context), 
+          child: CustomTextWidget(
+            text: 'Kembali',
+            size: 14.sp,
+            color: kPrimaryColor,
+          )
+        ),
       ],
     );
   }
